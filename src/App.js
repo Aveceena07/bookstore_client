@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Navbar from "./component/Navbar.js";
+import Footer from "./component/Footer.js";
+import Home from "./pages/Home";
+import Books from "./pages/Books";
+import Cart from "./pages/Cart";
+import Detail from "./pages/Detail.js";
+import Login from "./pages/Login";
+import { Routes, Route, Router } from "react-router-dom";
+import Register from "./pages/Register.js";
+import AddForm from "./pages/AddForm.js";
+import PrivateRoute from "./component/PrivateRoute.js";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      {/* <Router> */}
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />}>
+          Home
+        </Route>
+        <Route path="/books" element={<Books />}>
+          books{" "}
+        </Route>
+        <Route path="/login" element={ <Login />}>
+          Login
+        </Route>
+        <Route path="/detail" element={<PrivateRoute><Detail /></PrivateRoute>}>
+          Detail
+        </Route>
+        <Route path="/register" element={<Register />}>
+          Register
+        </Route>
+        <Route path="/addbook" element={<PrivateRoute><AddForm /></PrivateRoute>}></Route>
+        <Route path="/cart" element={<Cart />}>
+          Cart
+        </Route>
+        <Route
+          path="*"
+          element={<h1 className="text-center mt-3"> Page Not Found </h1>}
         >
-          Learn React
-        </a>
-      </header>
+          Cart
+        </Route>
+      </Routes>
+      <Footer />
+      {/* </Router> */}
     </div>
   );
 }
