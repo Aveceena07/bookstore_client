@@ -29,6 +29,19 @@ section {
   color: #012970;
 }
 
+.kartu {
+  background-color: aqua;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.kartu2 {
+  background-color: aqua;
+  padding-left: 50px;
+  padding-right: 50px;
+
+}
+
 @media (max-width: 768px) {
   .section-header p {
     font-size: 28px;

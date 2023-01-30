@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -8,8 +8,8 @@ function Register() {
 
   const [userRegister, setUserRegister] = useState({
     username: "",
-    password:"",
-    role:""
+    password: "",
+    role: "",
   });
 
   const handleOnChange = (e) => {
@@ -23,7 +23,7 @@ function Register() {
 
     try {
       const response = await fetch(`http://localhost:8080/register`, {
-        method:"POST",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -52,42 +52,44 @@ function Register() {
           <h1>Register</h1>
           <form method="post">
             <div className="txt_field">
-              <input type="text"
-              id="username"
-              className="form-control"
-              onChange={handleOnChange}
-              value={userRegister.username}
-              placeholder="Enter email address"
+              <input
+                type="text"
+                id="username"
+                className="form-control"
+                onChange={handleOnChange}
+                defaultValue={userRegister.username}
+                placeholder="Enter email address"
               />
             </div>
             <div className="txt_field">
               <label className="form-label">Password</label>
-              <input type="password"
-              id="password"
-              className="form-control"
-              onChange={handleOnChange}
-              value={userRegister.password}
-              placeholder="Enter password"
+              <input
+                type="password"
+                id="password"
+                className="form-control"
+                onChange={handleOnChange}
+                defaultValue={userRegister.password}
+                placeholder="Enter password"
               />
             </div>
             <div className="txt_field">
               <label className="form-label">Role</label>
-              <input type="text"
-              id="role"
-              className="form-control"
-              onChange={handleOnChange}
-              value={userRegister.role}
-              placeholder="Enter your role"
+              <input
+                type="text"
+                id="role"
+                className="form-control"
+                onChange={handleOnChange}
+                defaultValue={userRegister.role}
+                placeholder="Enter your role"
               />
             </div>
             <button
-             type="button"
-             className="btn btn-success btn-color mb-2 w-100"
-             onClick={register}
-            
+              type="button"
+              className="btn btn-info btn-color mb-2 w-100"
+              onClick={register}
             >
               Register
-              </button>
+            </button>
             <div className="signup_link">
               Have an Account? <Link to="/login">Signin</Link>
             </div>

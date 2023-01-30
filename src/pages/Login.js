@@ -9,7 +9,7 @@ function Login() {
 
   const [userLogin, setUserLogin] = useState({
     username: "",
-    password:"",
+    password: "",
   });
 
   const handleOnChange = (e) => {
@@ -33,47 +33,53 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        localStorage.setItem("id", data.userData.id);
+        localStorage.setItem("role", data.userData.role);
+        // console.log(data.token);
+        // console.log(data.userData.id);
+        // console.log(data.userData.role);
 
         if (location.state) {
           navigate(`${location.state.from.pathname}`);
         } else {
-          navigate("/")
+          navigate("/");
         }
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   return (
     <div className="popo">
       <div className="center">
         <h1>Login</h1>
         <form method="post">
           <div className="txt_field">
-            <input type="text"
-            id="username"
-            onChange={handleOnChange}
-            value={userLogin.username}
-            placeholder="Enter email address"
+            <input
+              type="text"
+              id="username"
+              onChange={handleOnChange}
+              defaultValue={userLogin.username}
+              placeholder="Enter email address"
             />
           </div>
           <div className="txt_field">
-            <input type="password"
-            id="password"
-            onChange={handleOnChange}
-            value={userLogin.password}
-            placeholder="Enter password"
+            <input
+              type="password"
+              id="password"
+              onChange={handleOnChange}
+              defaultValue={userLogin.password}
+              placeholder="Enter password"
             />
           </div>
           <div className="pass">Forgot Password?</div>
           <button
-             type="button"
-             className="btn btn-success btn-color mb-2 w-100"
-             onClick={signIn}
-            
-            >
-              Login
-              </button>
+            type="button"
+            className="btn btn-info btn-color mb-2 w-100"
+            onClick={signIn}
+          >
+            Login
+          </button>
           <div className="signup_link">
             Not a Member? <Link to="/register">Signup</Link>
           </div>

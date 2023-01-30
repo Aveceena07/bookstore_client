@@ -1,54 +1,56 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { instance as axios } from "../util/Api";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
-function AddForm(props) {
+function FormUpdate() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [author, setAuthor] = useState("");
-  const [cover, setCover] = useState("");
   const [stocks, setStocks] = useState("");
   const [price, setPrice] = useState("");
 
-  const postBooks = async (downloadURL) => {
+  const updateBook = async (downloadURL) => {
     try {
-      const formData = {
+      const data = {
         title: title,
         description: description,
         author: author,
-        cover: cover,
         stocks: stocks,
         price: price,
       };
+      console.log(data);
+      axios.put(`book/${id}`, data);
 
-      await axios.post(`book/`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      Swal.fire("Yes, You are Successful in editing the Book");
     } catch (err) {
       console.log(err);
     }
     navigate("/books");
   };
 
-  const save = (e) => {
-    e.preventDefault();
-    postBooks();
-    Swal.fire({
-      icon: "success",
-      title: "success add book",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+  const getById = async () => {
+    const { data } = await axios.get(`book/id/${id}`);
+
+    setTitle(data.title);
+    setDescription(data.description);
+    setAuthor(data.author);
+    setStocks(data.stocks);
+    setPrice(data.price);
   };
+
+  useEffect(() => {
+    getById();
+  }, [id]);
 
   return (
     <div className="container">
       <div className="judul mt-5">
-        <form className="row g-3" onSubmit={save}>
+        <form className="row g-3">
           <div className="col-md-6">
             <input
               type="text"
@@ -76,7 +78,7 @@ function AddForm(props) {
               placeholder="Deskripsi"
             />
           </div>
-          <div className="col-12">
+          {/* <div className="col-12">
             <input
               type="text"
               className="form-control"
@@ -84,7 +86,7 @@ function AddForm(props) {
               onChange={(e) => setCover(e.target.value)}
               placeholder="Url"
             />
-          </div>
+          </div> */}
           <div className="col-12">
             <input
               type="text"
@@ -105,8 +107,11 @@ function AddForm(props) {
           </div>
 
           <div className="col-12">
-            <button type="submit" className="btn btn-info text-light my-4">
-              Save
+            <button
+              onClick={updateBook}
+              className="btn btn-success text-light my-4"
+            >
+              Update
             </button>
           </div>
         </form>
@@ -115,4 +120,4 @@ function AddForm(props) {
   );
 }
 
-export default AddForm;
+export default FormUpdate;

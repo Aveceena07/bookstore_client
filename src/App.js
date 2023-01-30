@@ -9,6 +9,7 @@ import { Routes, Route, Router } from "react-router-dom";
 import Register from "./pages/Register.js";
 import AddForm from "./pages/AddForm.js";
 import PrivateRoute from "./component/PrivateRoute.js";
+import FormUpdate from "./component/FormUpdate.js";
 function App() {
   return (
     <div>
@@ -22,16 +23,40 @@ function App() {
         <Route path="/books" element={<Books />}>
           books{" "}
         </Route>
-        <Route path="/login" element={ <Login />}>
+        <Route path="/login" element={<Login />}>
           Login
         </Route>
-        <Route path="/detail" element={<PrivateRoute><Detail /></PrivateRoute>}>
+        <Route
+          path="/book/:id"
+          element={
+            <PrivateRoute>
+              <Detail />
+            </PrivateRoute>
+          }
+        >
           Detail
+        </Route>
+        <Route
+          path="/update/:id"
+          element={
+            <PrivateRoute>
+              <FormUpdate />
+            </PrivateRoute>
+          }
+        >
+          Update
         </Route>
         <Route path="/register" element={<Register />}>
           Register
         </Route>
-        <Route path="/addbook" element={<PrivateRoute><AddForm /></PrivateRoute>}></Route>
+        <Route
+          path="/addbook"
+          element={
+            <PrivateRoute>
+              <AddForm />
+            </PrivateRoute>
+          }
+        ></Route>
         <Route path="/cart" element={<Cart />}>
           Cart
         </Route>

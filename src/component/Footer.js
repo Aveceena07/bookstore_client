@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <div>
-      <footer className="site-footer">
+      <footer className="site-footer mt-4 bg-info text-dark">
         <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-6">
-              <h6>About</h6>
+              <h6 className="text-dark">About</h6>
               <p className="text-justify">
                 Humans have a natural response to different colors, and the
                 colors you choose can impact your conversion rates. That’s why
@@ -20,8 +20,8 @@ function Footer() {
             </div>
 
             <div className="col-xs-6 col-md-3">
-              <h6>Categories</h6>
-              <ul className="footer-links">
+              <h6 className="text-dark">Categories</h6>
+              <ul className="footer-links ">
                 <li>
                   <a href="http://scanfcode.com/category/c-language/">C</a>
                 </li>
@@ -52,7 +52,7 @@ function Footer() {
             </div>
 
             <div className="col-xs-6 col-md-3">
-              <h6>Quick Links</h6>
+              <h6 className="text-dark">Quick Links</h6>
               <ul className="footer-links">
                 <li>
                   <a href="http://scanfcode.com/about/">About Us</a>
@@ -76,7 +76,6 @@ function Footer() {
               </ul>
             </div>
           </div>
-          <hr />
         </div>
         <div className="container">
           <div className="row">

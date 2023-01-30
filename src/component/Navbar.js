@@ -1,16 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const qty = useSelector((state) => state.cart.qty);
 
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
-  }
+  };
   return (
-    <nav className="navbar navbar-expand-lg bg-secondary">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg bg-info">
+      <div className="container">
         <button
           className="navbar-toggler"
           type="button"
@@ -46,6 +48,7 @@ export default function Navbar() {
                 <b>Book</b>
               </Link>
             </li>
+
             <li className="nav-item">
               <Link className="nav-link" to="/login">
                 <b>Login</b>
@@ -57,16 +60,20 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
+          <form className="d-flex ">
+            {localStorage.getItem("role") === "user" ? (
+              <button type="button" className="btn  position-relative mr-5">
+                <Link className="nav-link" to="/cart">
+                  <i className="fa-solid fa-cart-shopping"></i>
+                </Link>
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {qty}
+                  <span className="visually-hidden">unread messages</span>
+                </span>
+              </button>
+            ) : (
+              <div></div>
+            )}
           </form>
         </div>
       </div>
